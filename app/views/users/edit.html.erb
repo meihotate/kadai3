@@ -1,0 +1,54 @@
+<session class="new_register">
+
+<% if @user.errors.any? %>
+    <div class="error_explanation1">
+    <%= @user.errors.count %> errors happened.
+    </div>
+    <div class="error_explanation2">
+    <% @user.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
+    </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <p class="notice2">1 error prohibited this obj from being saved:</p>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<div>
+<h2>User Info</h2>
+
+<%= form_for(@user) do |f| %>
+
+    <div class="field clearfix">
+        <label class="label_edit" for="user_name">Name</label>
+        <span class="text_field">
+        <%= f.text_field :name, autofocus: true, id:"user_name", placeholder:"名前"%>
+        </span>
+    </div>
+    <div class="field clearfix">
+        <label for="user_name">Image</label>
+        <div class="user-edit-image">
+            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+        </div>
+    </div>
+    <div>
+    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", id:"user_name", class: "user-edit-form" %>
+    </div>
+    <div class="field clearfix">
+        <label class="label_edit2" for="user_name">Introduction</label>
+        <span>
+        <%= f.text_area :introduction, autofocus: true, id:"user_name", placeholder:"紹介文" %>
+        </span>
+    </div>
+    <div class="field">
+        <span class="text_field">
+        <%= f.submit "Update User"%>
+        </span>
+    </div>
+
+<% end %>
+
+</div>
+</session>

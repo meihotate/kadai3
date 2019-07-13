@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head class="container">
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="container">
+    <header>
+
+        <header class="navbar navbar-fixed-top navbar-inverse">
+          <div class="container">
+            <nav class="nav navbar-nav navbar-left">
+              <span>Bookers</span>
+            </nav>
+            <nav>
+              <% if user_signed_in? %>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a class="glyphicon glyphicon-home home" href="/">
+                          Home
+                      </a></li>
+                      <li>
+                        <%= link_to "  Users", users_path, class:"glyphicon glyphicon-user users" %>
+                      </li>
+                      <li><a class="glyphicon glyphicon-book books" href="/books">
+                          Books
+                      </a></li>
+                      <li><a class="glyphicon glyphicon-log-out logout" rel="nofollow" data-method="delete" href="/users/sign_out">
+                          logout
+                      </a></li>
+                  </ul>
+              <% else %>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a class="glyphicon glyphicon-home home" href="/">
+                          Home
+                      </a></li>
+                      <li>
+                          <%= link_to "  About", home_about_path, class:"glyphicon glyphicon-link about" %>
+                      </li>
+                      <li><a class="glyphicon glyphicon-edit sign_up" href="/users/sign_up">
+                          sign up
+                      </a></li>
+                      <li><a class="glyphicon glyphicon-log-in sign_in" href="/users/sign_in">
+                          login
+                      </a></li>
+                  </ul>
+              <% end %>
+            </nav>
+          </div>
+
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+
+        </header>
+
+        
+
+    <%= yield %>
+  </body>
+  <footer>
+    <div class="footer_moji">
+    CopyRight Infratop.inc
+    </div>
+  </footer>
+</html>
